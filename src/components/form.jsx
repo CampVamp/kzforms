@@ -1,87 +1,36 @@
-import { useState } from "react";
+import axios from "axios";
+import TextField from "./TextField";
 
 const Form = () => {
-  //Values
-  const [values, setValues] = useState({
-    name: "",
-    regNo: "",
-    pEmail: "",
-    sEmail: "",
-    gitlink: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  //Input Change Handler
-  const handleNameInputChange = (event) => {
-    setValues({ ...values, name: event.target.value });
-  };
-  const handleRegnoInputChange = (event) => {
-    setValues({ ...values, regNo: event.target.value });
-  };
-  const handlePemailInputChange = (event) => {
-    setValues({ ...values, pEmail: event.target.value });
-  };
-  const handleSemailInputChange = (event) => {
-    setValues({ ...values, sEmail: event.target.value });
-  };
-  const handleGitlinkInputChange = (event) => {
-    setValues({ ...values, gitlink: event.target.value });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitted(true);
+    console.log(event.target.name.value);
+    axios
+      .post(`${process.env.REACT_APP_API_BASE_URL}/posts`, {
+        name: event.target.name.value,
+        regNo: event.target.regNo.value,
+        pEmail: event.target.pEmail.value,
+        sEmail: event.target.sEmail.value,
+        gitlink: event.target.gitlink.value,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
   };
 
-  //Forms
   return (
-    <div>
-      <form className="form-container" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={values.name}
-          placeholder="Name"
-          className="form-field"
-          onChange={handleNameInputChange}
-        ></input>
-        <br></br>
-        <input
-          type="text"
-          value={values.regNo}
-          placeholder="Registeration No"
-          className="form-field"
-          onChange={handleRegnoInputChange}
-        ></input>
-        <br></br>
-        <input
-          type="text"
-          value={values.pEmail}
-          placeholder="Personal email"
-          className="form-field"
-          onChange={handlePemailInputChange}
-        ></input>
-        <br></br>
-        <input
-          type="text"
-          value={values.sEmail}
-          placeholder="SRMIST emil"
-          className="form-field"
-          onChange={handleSemailInputChange}
-        ></input>
-        <br></br>
-        <input
-          type="text"
-          value={values.gitlink}
-          placeholder="Github Link"
-          className="form-field"
-          onChange={handleGitlinkInputChange}
-        ></input>
-        <br></br>
-        <button className="form-field" type="submit">
-          Submit
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <TextField text="Name" name="name" />
+      <br />
+      <TextField text="Registration No" name="regNo" />
+      <br />
+      <TextField text="Personal Email" name="pEmail" />
+      <br />
+      <TextField text="SRMIST Email" name="sEmail" />
+      <br />
+      <TextField text="Github Link" name="gitlink" />
+      <br />
+      <button type="Submit">Submit</button>
+    </form>
   );
 };
 
