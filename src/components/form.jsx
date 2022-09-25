@@ -18,19 +18,21 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField text="Name" name="name" />
-      <br />
-      <TextField text="Registration No" name="regNo" />
-      <br />
-      <TextField text="Personal Email" name="pEmail" />
-      <br />
-      <TextField text="SRMIST Email" name="sEmail" />
-      <br />
-      <TextField text="Github Link" name="gitlink" />
-      <br />
-      <button type="Submit">Submit</button>
-    </form>
+    <div className="Main-Frame">
+      <form onSubmit={handleSubmit}>
+        <TextField text="Name" name="name" className="Form-Feild" />
+        <br />
+        <TextField text="Registration No" name="regNo" className="Form-Feild" />
+        <br />
+        <TextField text="Personal Email" name="pEmail" className="Form-Feild" />
+        <br />
+        <TextField text="SRMIST Email" name="sEmail" className="Form-Feild" />
+        <br />
+        <TextField text="Github Link" name="gitlink" className="Form-Feild" />
+        <br />
+        <button type="Submit">Submit</button>
+      </form>
+    </div>
   );
 };
 

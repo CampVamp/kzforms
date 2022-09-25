@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #181818;
+}
+
+.Main-Frame {
+  background-color: white;
+  margin: auto;
+  width: 40%;
+  border: 3px solid green;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.Main-Frame input {
+  margin: 6px 0;
+}
+
+.Main-Frame button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.Main-Frame button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.Main-Frame button span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.Main-Frame button:hover span {
+  padding-right: 25px;
+}
+
+.Main-Frame button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
