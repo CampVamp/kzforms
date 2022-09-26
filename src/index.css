@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -10,6 +12,9 @@ body {
   background-color: white;
   margin: auto;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 40%;
   height: 80vh;
   padding: 10px;
@@ -24,6 +29,7 @@ body {
 
 .Form-Title {
   text-align: center;
+  font-family: "Noto Sans Mono", monospace;
 }
 
 .Form-Feild {
