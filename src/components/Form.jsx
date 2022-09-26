@@ -19,7 +19,7 @@ const Form = () => {
 
   return (
     <div className="Main-Frame">
-      <h1 className="Form-Title">Registeration</h1>
+      <h1 className="Form-Title">REGISTRATION</h1>
       <form onSubmit={handleSubmit}>
         <TextField text="Name" name="name" />
         <br />
