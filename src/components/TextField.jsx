@@ -1,5 +1,7 @@
 const TextField = ({ text, name }) => {
-  return <input type="text" placeholder={text} name={name} />;
+  return (
+    <input className="Form-Feild" type="text" placeholder={text} name={name} />
+  );
 };
 
 export default TextField;
