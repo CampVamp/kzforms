@@ -60,3 +60,15 @@ body {
   transform: translateY(3px);
   box-shadow: 2px 3px 0px 0px rgb(7, 48, 13);
 }
+
+@media all and (max-width: 620px) {
+  .Main-Frame {
+    width: 80%;
+  }
+}
+
+@media all and (min-width: 1080px) {
+  .Main-Frame {
+    width: 400px;
+  }
+}
