@@ -43,8 +43,22 @@ const Form = () => {
         console.error("Cannot Post", err);
       }
     } else {
-      alert("Wrong Details");
-      window.print();
+      // console.log();
+      // userSchema.validate({}).catch((err) => {
+      //   console.log(err);
+      // });
+      userSchema
+        .validate(formdata, { abortEarly: false })
+        .then(function () {
+          // Success
+        })
+        .catch(function (err) {
+          err.inner.forEach((e) => {
+            console.log(e.message);
+          });
+          alert("Wrong Details");
+          window.print();
+        });
     }
   };
 
