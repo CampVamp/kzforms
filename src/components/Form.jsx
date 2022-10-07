@@ -7,7 +7,7 @@ const Form = () => {
   const [data, setData] = useState({});
   const [showform, setShowForm] = useState(true);
   let formdata;
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     formdata = {
       name: event.target.name.value,
@@ -16,14 +16,22 @@ const Form = () => {
       sEmail: event.target.sEmail.value,
       gitlink: event.target.gitlink.value,
     };
-    axios
-      .post(`${process.env.REACT_APP_API_BASE_URL}/posts`, formdata)
-      .then((res) => {
-        console.log(res);
-        setData(formdata);
-        setShowForm(false);
-      })
-      .catch((err) => console.error(err));
+    // axios
+    //   .post(`${process.env.REACT_APP_API_BASE_URL}/posts`, formdata)
+    //   .then((res) => {
+    //     console.log(res);
+    //     setData(formdata);
+    //     setShowForm(false);
+    //   })
+    //   .catch((err) => console.error(err));
+    try {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/posts`, formdata);
+      // console.log(res);
+      setData(formdata);
+      setShowForm(false);
+    } catch (err) {
+      console.error("Cannot Post", err);
+    }
   };
 
   console.log("AJay", data);
