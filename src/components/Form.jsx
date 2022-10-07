@@ -1,9 +1,25 @@
 import axios from "axios";
 import TextField from "./TextField";
 import SubmitForm from "./SubmitForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 import { userSchema } from "../Validations/UserValidations";
+
+// const showToast = () => {
+//   toast.error("🦄 Wow so easy!", {
+//     position: "top-right",
+//     autoClose: 5000,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined,
+//   });
+// };
+
+// const notify = () => toast("Wow so easy !");
 
 const Form = () => {
   const [data, setData] = useState({});
@@ -43,12 +59,27 @@ const Form = () => {
         console.error("Cannot Post", err);
       }
     } else {
-      alert("Wrong Details");
-      window.print();
+      // console.log();
+      // userSchema.validate({}).catch((err) => {
+      //   console.log(err);
+      // });
+      userSchema
+        .validate(formdata, { abortEarly: false })
+        .then(function () {
+          // Success
+        })
+        .catch(function (err) {
+          err.inner.forEach((e) => {
+            console.log(e.message);
+            <ToastContainer />;
+          });
+          // alert("Wrong Details");
+          // window.print();
+        });
     }
   };
 
-  console.log("Data :", data);
+  // console.log("Data :", data);
 
   return (
     <div className="Main-Frame">
@@ -70,6 +101,10 @@ const Form = () => {
               SUBMIT
             </button>
           </form>
+          {/* <div>
+            <button onClick={notify}>Notify !</button>
+            <ToastContainer />
+          </div> */}
         </>
       )}
       {!showform && <SubmitForm />}
