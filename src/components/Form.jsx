@@ -3,6 +3,8 @@ import TextField from "./TextField";
 import SubmitForm from "./SubmitForm";
 import { useState } from "react";
 
+import { userSchema } from "../Validations/UserValidations";
+
 const Form = () => {
   const [data, setData] = useState({});
   const [showform, setShowForm] = useState(true);
@@ -16,6 +18,9 @@ const Form = () => {
       sEmail: event.target.sEmail.value,
       gitlink: event.target.gitlink.value,
     };
+
+    const isValid = await userSchema.isValid(formdata);
+
     // axios
     //   .post(`${process.env.REACT_APP_API_BASE_URL}/posts`, formdata)
     //   .then((res) => {
@@ -24,17 +29,26 @@ const Form = () => {
     //     setShowForm(false);
     //   })
     //   .catch((err) => console.error(err));
-    try {
-      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/posts`, formdata);
-      // console.log(res);
-      setData(formdata);
-      setShowForm(false);
-    } catch (err) {
-      console.error("Cannot Post", err);
+    if (isValid) {
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API_BASE_URL}/posts`,
+          formdata
+        );
+        // console.log(res);
+        console.log(isValid);
+        setData(formdata);
+        setShowForm(false);
+      } catch (err) {
+        console.error("Cannot Post", err);
+      }
+    } else {
+      alert("Wrong Details");
+      window.print();
     }
   };
 
-  console.log("AJay", data);
+  console.log("Data :", data);
 
   return (
     <div className="Main-Frame">
