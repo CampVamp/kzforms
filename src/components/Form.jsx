@@ -7,20 +7,6 @@ import { useState } from "react";
 
 import { userSchema } from "../Validations/UserValidations";
 
-// const showToast = () => {
-//   toast.error("🦄 Wow so easy!", {
-//     position: "top-right",
-//     autoClose: 5000,
-//     hideProgressBar: false,
-//     closeOnClick: true,
-//     pauseOnHover: true,
-//     draggable: true,
-//     progress: undefined,
-//   });
-// };
-
-// const notify = () => toast("Wow so easy !");
-
 const Form = () => {
   const [data, setData] = useState({});
   const [showform, setShowForm] = useState(true);
@@ -37,21 +23,19 @@ const Form = () => {
 
     const isValid = await userSchema.isValid(formdata);
 
-    // axios
-    //   .post(`${process.env.REACT_APP_API_BASE_URL}/posts`, formdata)
-    //   .then((res) => {
-    //     console.log(res);
-    //     setData(formdata);
-    //     setShowForm(false);
-    //   })
-    //   .catch((err) => console.error(err));
     if (isValid) {
       try {
-        await axios.post(
-          `${process.env.REACT_APP_API_BASE_URL}/posts`,
-          formdata
+        const res = await fetch(
+          `${process.env.REACT_APP_API_BASE_URL}/postform`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formdata),
+          }
         );
-        // console.log(res);
+        console.log(res);
         console.log(isValid);
         setData(formdata);
         setShowForm(false);
@@ -59,10 +43,6 @@ const Form = () => {
         console.error("Cannot Post", err);
       }
     } else {
-      // console.log();
-      // userSchema.validate({}).catch((err) => {
-      //   console.log(err);
-      // });
       userSchema
         .validate(formdata, { abortEarly: false })
         .then(function () {
@@ -73,13 +53,9 @@ const Form = () => {
             console.log(e.message);
             <ToastContainer />;
           });
-          // alert("Wrong Details");
-          // window.print();
         });
     }
   };
-
-  // console.log("Data :", data);
 
   return (
     <div className="Main-Frame">
@@ -101,10 +77,6 @@ const Form = () => {
               SUBMIT
             </button>
           </form>
-          {/* <div>
-            <button onClick={notify}>Notify !</button>
-            <ToastContainer />
-          </div> */}
         </>
       )}
       {!showform && <SubmitForm />}
