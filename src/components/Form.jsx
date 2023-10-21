@@ -60,7 +60,7 @@ const Form = () => {
     <div className="Main-Frame">
       {showform && (
         <>
-          <h1 className="Form-Title">REGISTRATION</h1>
+          <h1 className="Form-Title">REGISTER</h1>
           <form onSubmit={handleSubmit}>
             <TextField text="Name" name="name" />
             <br />
